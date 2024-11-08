@@ -1,0 +1,50 @@
+<div class="body">
+    <div id="contenedor">
+        <div id="central">
+            <div id="login">
+                <div class="container-logo">
+                    <div class="img">
+                        <img src="assets/img/logo_baranoa-removebg-preview.png" alt="alcaldia de baranoa" class="logo-baranoa">
+                    </div>
+
+                </div>
+
+                <div class="titulo">
+                    <span class="book-text">Iniciar Sesion</span>
+                </div>
+                <form id="loginform">
+                    <!-- Campo de Correo -->
+                    <div class="input-container">
+                        <i class="icon fas fa-user"></i>
+                        <input style="color: white !important;background-color: #004755 !important;" type="email"
+                            id="correo" formControlName="correo" placeholder="Correo" required />
+                    </div>
+                    <!-- <div *ngIf="loginForm.get('correo')?.invalid && loginForm.get('correo')?.touched" class="error">
+                            El correo es requerido y debe ser válido.
+                          </div> -->
+
+                    <!-- Campo de Contraseña -->
+                    <div class="input-container">
+                        <i class="icon fas fa-lock"></i>
+                        <input style="color: white !important; background-color: #004755 !important;" type="password"
+                            id="password" formControlName="password" placeholder="Contraseña" required />
+                    </div>
+                    <!-- <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="error">
+                            La contraseña es requerida.
+                          </div> -->
+                    <div class="content-btn">
+
+                        <button style="background-color: #004755; color: white;  cursor: pointer; font-weight: bold;"
+                            type="submit">Ingresar</button>
+                    </div>
+
+                </form>
+                <!-- <div class="pie-form"> -->
+                <!-- <a href="#">¿Perdiste tu contraseña?</a> -->
+                <!-- <a href="#">¿No tienes Cuenta? Registrate</a> -->
+                <!-- </div> -->
+            </div>
+
+        </div>
+    </div>
+</div>

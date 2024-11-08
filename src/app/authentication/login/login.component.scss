@@ -1,0 +1,225 @@
+.body {
+    font-family: 'Overpass', sans-serif;
+    font-weight: normal;
+    font-size: 100%;
+    color: #1b262c;
+
+    margin: 0;
+    background-color: #1b262c;
+    background-position: center;
+
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    min-width: 100vw;
+    min-height: 100vh;
+    width: 100%;
+    height: 100%;
+
+}
+
+#contenedor {
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    min-width: 100vw;
+    min-height: 100vh;
+    width: 100%;
+    height: 100%;
+}
+
+#central {
+    max-width: 360px;
+    width: 100%;
+}
+
+.titulo {
+    font-size: 250%;
+    color: #bbe1fa;
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 50px 30px 0 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+#login {
+    width: 100%;
+
+    background-color: #055264;
+
+    -moz-box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.15);
+    box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.15);
+    border-radius: 25px;
+    box-sizing: border-box;
+}
+
+#login input {
+    font-family: 'Overpass', sans-serif;
+
+
+    display: block;
+    width: 100%;
+    height: 50px;
+
+    margin-bottom: 10px;
+    padding: 5px 5px 5px 47px;
+
+    box-sizing: border-box;
+    background-color: #2d6259 !important;
+
+    border-radius: 30px;
+    border: #ffffff solid 1px;
+
+
+
+}
+
+#login input::placeholder {
+    font-family: 'Overpass', sans-serif;
+    color: #b5cac6;
+}
+
+#login button {
+    font-family: 'Overpass', sans-serif;
+    color: #1b262c;
+    width: 100%;
+    height: 55px;
+    border: none;
+
+    border-radius: 30px;
+
+    background-color: #bbe1fa;
+
+
+    font-size: 15px;
+}
+
+
+
+.pie-form {
+    font-size: 90%;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.pie-form a {
+    display: block;
+    text-decoration: none;
+    color: #bbe1fa;
+    margin-bottom: 3px;
+}
+
+.pie-form a:hover {
+    color: #0f4c75;
+}
+
+.inferior {
+    margin-top: 10px;
+    font-size: 90%;
+    text-align: center;
+}
+
+.inferior a {
+    display: block;
+    text-decoration: none;
+    color: #bbe1fa;
+    margin-bottom: 3px;
+}
+
+.inferior a:hover {
+    color: #3282b8;
+}
+
+/* login.component.scss */
+.input-container {
+    position: relative;
+    /* Permite posicionar elementos hijos en relación a este contenedor */
+    margin-top: 1rem;
+    /* Espaciado superior */
+    margin: 16px 30px 0 30px;
+}
+
+.icon {
+    position: absolute;
+    /* Posiciona el ícono de forma absoluta */
+    left: 25px;
+    /* Espacio desde el borde izquierdo del contenedor */
+    top: 47%;
+    /* Centra verticalmente */
+    transform: translateY(-50%);
+    /* Ajusta el ícono para que esté perfectamente centrado */
+    color: #8caea7;
+    /* Color del ícono */
+    font-size: 15px;
+}
+
+input {
+    width: 100%;
+    /* Ancho completo */
+    padding: 0.8rem 1rem 0.8rem 2.5rem;
+    /* Espaciado interno, dejando espacio para el ícono */
+    border: 1px solid #ddd;
+    /* Borde gris claro */
+    border-radius: 5px;
+    /* Bordes redondeados */
+    // font-size: 1rem; /* Tamaño de fuente */
+
+    &:focus {
+        border-color: #3eb489;
+        /* Color del borde al enfocar */
+        outline: none;
+        /* Sin contorno predeterminado */
+    }
+}
+
+.content-btn {
+    padding: 50px 30px 50px 30px;
+    margin-top: 26px;
+    background: white;
+    border-radius: 40px 40px 25px 25px;
+}
+
+.free-text {
+    font-size: 21px;
+    color: #f7f9f9;
+}
+
+.book-text {
+    font-size: 36px;
+    font-weight: 700;
+    color: #edb232;
+    height: 46px;
+}
+
+.img {
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-top: -80px;
+}
+
+.container-logo{
+    margin-top: 70px;
+    overflow: visible;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.logo-baranoa{
+    width: 79%;
+    object-fit: cover;
+}
