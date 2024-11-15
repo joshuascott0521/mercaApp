@@ -1,0 +1,62 @@
+@import '../../pages/dashboard/dashboard.component.scss';
+
+.header {
+  background-color: white;
+  border-bottom: 1px solid $border-color;
+  padding: 10px 0;
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo-img {
+    height: 50px;
+  }
+
+  .title {
+    text-align: center;
+
+    h1 {
+      font-size: 18px;
+      margin: 0;
+    }
+
+    p {
+      font-size: 14px;
+      color: $secondary-color;
+      margin: 2px 0;
+    }
+  }
+
+  .user-info {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+
+    span {
+      margin-right: 10px;
+    }
+
+    .avatar {
+      width: 40px;
+      height: 40px;
+      background-color: $primary-color;
+      color: white;
+      border-radius: 50%;
+      @include flex-center;
+      font-weight: bold;
+    }
+  }
+  .logout-button{
+    margin-top: 5px;
+    padding: 8px 15px;
+    cursor: pointer;
+    font-weight: 600;
+    background-color: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+  }
+}

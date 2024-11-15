@@ -1,0 +1,19 @@
+<header class="header">
+    <div class="container">
+      <div class="logo">
+        <img src="../../../assets/img/logo_baranoa-removebg-preview.png" alt="Logo Baranoa" class="logo-img">
+      </div>
+      <div class="title">
+        <h1>Alcaldía Municipal de Baranoa</h1>
+        <p>Secretaría de Hacienda</p>
+        <p>Mercado Público</p>
+      </div>
+      <div class="user-info">
+        <span>{{ nombreUsuario }}</span>
+        <!-- <div class="avatar">{{ nombreUsuario.charAt(0) }}{{ nombreUsuario.split(' ')[1]?.charAt(0) }}</div> -->
+        <button (click)="logout()" class="logout-button">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          Cerrar sesión</button> 
+      </div>
+    </div>
+  </header>

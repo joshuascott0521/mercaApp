@@ -26,7 +26,8 @@ export class AuthService {
   login(correo: string, password: string): Observable<User> {
     return this.http.post<User>(`${this.apiUrl}/usuario/Login`, { correo, password })
       .pipe(map(user => {
-        localStorage.setItem('currentUser', JSON.stringify(user));
+        localStorage.setItem('nombreUsuario', user.nombre);
+        localStorage.setItem('token', user.token,);
         this.currentUserSubject.next(user);
         return user;
       }));

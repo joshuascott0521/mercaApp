@@ -1,0 +1,10 @@
+<div class="filters container">
+    <p class="filer-label">FILTROS:</p>
+    <select [(ngModel)]="selectedYear" class="filter-select">
+        <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+    </select>
+    <select [(ngModel)]="selectedMonth" class="filter-select">
+        <option *ngFor="let month of months" [value]="month">{{ month }}</option>
+      </select>
+      <button (click)="onFilter()" class="filter-button">Filtrar</button>
+</div>

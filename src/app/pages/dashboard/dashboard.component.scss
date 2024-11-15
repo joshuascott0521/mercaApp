@@ -38,105 +38,6 @@ $border-radius: 8px;
   padding: 0 20px;
 }
 
-// Estilos del HEADER
-.header {
-  background-color: white;
-  border-bottom: 1px solid $border-color;
-  padding: 10px 0;
-
-  .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .logo-img {
-    height: 50px;
-  }
-
-  .title {
-    text-align: center;
-
-    h1 {
-      font-size: 18px;
-      margin: 0;
-    }
-
-    p {
-      font-size: 14px;
-      color: $secondary-color;
-      margin: 2px 0;
-    }
-  }
-
-  .user-info {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    text-align: center;
-
-    span {
-      margin-right: 10px;
-    }
-
-    .avatar {
-      width: 40px;
-      height: 40px;
-      background-color: $primary-color;
-      color: white;
-      border-radius: 50%;
-      @include flex-center;
-      font-weight: bold;
-    }
-    .logout-button{
-      margin-top: 5px;
-      padding: 8px 15px;
-      cursor: pointer;
-      font-weight: 600;
-      background-color: #f8f9fa;
-      border: 1px solid #e0e0e0;
-      border-radius: 4px;
-    }
-  }
-}
-
-// Filters Styles
-.filters {
-  background-color: white;
-  margin-top: 20px;
-  padding: 15px;
-  border-radius: $border-radius;
-  @include card-shadow;
-  display: flex;
-  align-items: center;
-
-  .filter-label {
-    font-weight: bold;
-    margin-right: 15px;
-    margin-bottom: 1px;
-  }
-
-  .filter-select {
-    padding: 8px;
-    margin-right: 10px;
-    border: 1px solid $border-color;
-    border-radius: 4px;
-  }
-
-  .filter-button {
-    padding: 8px 15px;
-    background-color: $primary-color;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-
-    &:hover {
-      background-color: darken($primary-color, 10%);
-    }
-  }
-}
-
 // Cards Grid Styles
 .cards-grid {
   display: grid;
@@ -171,8 +72,8 @@ $border-radius: 8px;
         font-weight: bold;
 
         &.closed {
-          background-color: #b4b5b7;
-          color:#bf616a;
+          background-color: lighten($danger-color, 30%);
+          color: $danger-color;
         }
 
         &.open {
