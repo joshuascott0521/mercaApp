@@ -74,7 +74,7 @@
     padding: 5px 5px 5px 47px;
 
     box-sizing: border-box;
-    background-color: #2d6259 !important;
+    // background-color: #2d6259 !important;
 
     border-radius: 30px;
     border: #ffffff solid 1px;
@@ -83,10 +83,10 @@
 
 }
 
-#login input::placeholder {
-    font-family: 'Overpass', sans-serif;
-    color: #b5cac6;
-}
+// #login input::placeholder {
+//     font-family: 'Overpass', sans-serif;
+//     color: #b5cac6;
+// }
 
 #login button {
     font-family: 'Overpass', sans-serif;
@@ -151,15 +151,15 @@
 .icon {
     position: absolute;
     /* Posiciona el ícono de forma absoluta */
-    left: 25px;
+    left: 19px;
     /* Espacio desde el borde izquierdo del contenedor */
     top: 47%;
     /* Centra verticalmente */
     transform: translateY(-50%);
     /* Ajusta el ícono para que esté perfectamente centrado */
-    color: #8caea7;
+    // color: #8caea7;
     /* Color del ícono */
-    font-size: 15px;
+    font-size: 17px;
 }
 
 input {
@@ -172,6 +172,7 @@ input {
     border-radius: 5px;
     /* Bordes redondeados */
     // font-size: 1rem; /* Tamaño de fuente */
+    font-weight: 700;
 
     &:focus {
         border-color: #3eb489;
@@ -210,6 +211,7 @@ input {
     border-radius: 50%;
     overflow: hidden;
     margin-top: -80px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
 }
 
 .container-logo{

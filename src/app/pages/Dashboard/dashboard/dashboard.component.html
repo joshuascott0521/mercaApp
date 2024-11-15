@@ -1,0 +1,68 @@
+<div class="dashboard">
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="logo">
+        <img src="assets/img/logo_baranoa-removebg-preview.png" alt="Logo Baranoa" class="logo-img">
+      </div>
+      <div class="title">
+        <h1>Alcaldía Municipal de Baranoa</h1>
+        <p>Secretaría de Hacienda</p>
+        <p>Mercado Público</p>
+      </div>
+      <div class="user-info">
+        <span>{{ userName }}</span>
+        <button (click)="logout()" class="logout-button">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          Cerrar sesión</button>
+        <!-- <div class="avatar">JS</div> -->
+      </div>
+    </div>
+  </header>
+
+  <!-- FILTRO -->
+  <div class="filters container">
+    <p class="filter-label">FILTROS:</p>
+    <select [(ngModel)]="year" class="filter-select">
+      <option *ngFor="let y of years" [value]="y">{{ y }}</option>
+    </select>
+    <select [(ngModel)]="month" class="filter-select">
+      <option *ngFor="let m of months" [value]="m">{{ m }}</option>
+    </select>
+    <button (click)="onFilter()" class="filter-button">Filtrar</button>
+  </div>
+
+  <!-- CARD LIQUIDACIONES POR DIA -->
+  <div class="cards-grid container">
+    <div class="card" *ngFor="let card of dayCards">
+      <div class="card-header">
+        <h2>{{ card.id }} - {{ card.day }}</h2>
+        <span class="status" [ngClass]="{'closed': card.status === 'CERRADO', 'open': card.status === 'ABIERTO'}">
+          {{ card.status }}
+        </span>
+      </div>
+      <div class="card-content">
+        <div class="stat">
+          <div class="stat-circle orange">{{ card.totalLiquidados }}</div>
+          <p class="stat-amount orange">${{ card.montoLiquidado | number:'1.0-0' }}</p>
+        </div>
+        <div class="stat">
+          <div class="stat-circle green">{{ card.cantidadPagados }}</div>
+          <p class="stat-amount green">${{ card.montoPagado | number:'1.0-0' }}</p>
+        </div>
+        <div class="stat">
+          <div class="stat-circle red">{{ card.cantidadPendientes }}</div>
+          <p class="stat-amount red">${{ card.montoPendiente | number:'1.0-0' }}</p>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button class="card-button">
+          <i class="fas fa-download"></i> PDF
+        </button>
+        <button class="card-button">
+          <i class="fas fa-eye"></i> Ver Detalle
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
