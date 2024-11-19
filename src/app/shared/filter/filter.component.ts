@@ -1,21 +1,30 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
+interface Month {
+  id: number;
+  name: string;
+}
+
 @Component({
   selector: 'app-filter',
   templateUrl: './filter.component.html',
   styleUrls: ['./filter.component.scss']
 })
 export class FilterComponent {
-  @Input() years: string[] = [];
-  @Input() months: string[] = [];
-  @Input() days: string[] = [];
-  @Input() selectDay: string = '';
-  @Input() selectedYear: string = '';
-  @Input() selectedMonth: string = '';
-  @Output() filter = new EventEmitter<void>();
+  @Input() years: number[] = [];
+  @Input() months: Month[] = [];
+  @Input() days: number[] = []
+  @Input() selectedYear!: number;
+  @Input() selectedMonth!: Month;
+  @Input() selectedDay?: number;
+  @Input() showDayFilter: boolean = false;
+  @Input() isLoading: boolean = false;
+  @Output() filter = new EventEmitter<{year: number, month: Month, day?: number}>();
 
   onFilter(){
-    this.filter.emit();
+    this.filter.emit({year: this.selectedYear,
+       month: this.selectedMonth,
+       day: this.showDayFilter ? this.selectedDay : undefined
+      });
   }
 }
-

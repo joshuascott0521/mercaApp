@@ -1,19 +1,12 @@
-
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { FilterService } from 'src/app/core/services/filter/filter.service';
 import { LiquidationsSummaryYeasMonthsService } from 'src/app/core/services/liquidations/liquidations-summary-yeas-months.service';
 
-interface DayCard {
+interface Month {
   id: number;
-  day: string;
-  status: 'CERRADO' | 'ABIERTO';
-  totalLiquidados: number;
-  montoLiquidado: number;
-  cantidadPagados: number;
-  montoPagado: number;
-  cantidadPendientes: number;
-  montoPendiente: number;
+  name: string;
 }
 
 @Component({
@@ -22,104 +15,71 @@ interface DayCard {
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  year: string = '2024';
-  month: string = 'NOVIEMBRE';
-  nombreUsuario: any;
-  liquidations: any;  
-  fechasConDias: any[] = [];
+  year!: number;
+  month!: Month;
+  nombreUsuario!: string;
+  liquidations: any[] = []; 
+  years: number[] = [];
+  months: Month[] = [];
+  isLoading: boolean = false;
 
-  years: string[] = ['2023', '2024'];
-  months: string[] = [
-    'ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO',
-    'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE'
-  ];
-    constructor(
+  constructor(
     private authService: AuthService,
     private router: Router,
-    private apiLiquidacionesSummary: LiquidationsSummaryYeasMonthsService
+    private apiLiquidacionesSummary: LiquidationsSummaryYeasMonthsService,
+    private apiGetFilter: FilterService
   ) { }
+
   ngOnInit(): void {
-    this.cargarFechas();
-    this.nombreUsuario = localStorage.getItem('nombreUsuario')
-    // this.apiLiquidacionesSummary.getSummaryYearMonths(2024, 11).subscribe({
-    //   next: (data) => {
-    //     this.liquidations = data;
-    //     console.log('Datos recibidos:', data);
-    //   },
-    //   error: (error) => {
-    //     console.error('Error al consumir la API:', error);
-    //   }
-    // });
+    this.nombreUsuario = localStorage.getItem('nombreUsuario') || '';
+    this.dataFilter();
   }
 
-
-  // dayCards: DayCard[] = [
-  //   {
-  //     id: 1,
-  //     day: "LUNES",
-  //     status: "CERRADO",
-  //     totalLiquidados: 45,
-  //     montoLiquidado: 500000,
-  //     cantidadPagados: 40,
-  //     montoPagado: 420000,
-  //     cantidadPendientes: 5,
-  //     montoPendiente: 80000,
-  //   },
-  //   {
-  //     id: 2,
-  //     day: "MARTES",
-  //     status: "CERRADO",
-  //     totalLiquidados: 38,
-  //     montoLiquidado: 450000,
-  //     cantidadPagados: 35,
-  //     montoPagado: 400000,
-  //     cantidadPendientes: 3,
-  //     montoPendiente: 50000,
-  //   },
-  //   {
-  //     id: 3,
-  //     day: "MIERCOLES",
-  //     status: "ABIERTO",
-  //     totalLiquidados: 38,
-  //     montoLiquidado: 450000,
-  //     cantidadPagados: 35,
-  //     montoPagado: 400000,
-  //     cantidadPendientes: 3,
-  //     montoPendiente: 50000,
-  //   },
-  // ];
-  cargarFechas(): void {
-    const ano = 2024;
-    const mes = 11; 
-
-    this.apiLiquidacionesSummary.getSummaryYearMonths(ano, mes).subscribe(
-      (fechas) => {
-        this.liquidations = fechas;
-        console.log('DIA DE LA SEMANA', this.fechasConDias);
+  dataFilter() {
+    this.apiGetFilter.getDataFilter().subscribe(
+      (data) => {
+        console.log('Filter data:', data);
         
+        this.years = data.years;
+        this.months = data.months;
+        
+        // Set default values
+        this.year = this.years[0];
+        this.month = this.months[0];
+
+        // Load initial data
+        this.loadLiquidations();
       },
       (error) => {
-        console.error('Error al obtener las fechas:', error);
+        console.error('Error fetching filter data:', error);
       }
     );
   }
 
-  onFilter() {
-    console.log('Filtering with year:', this.year, 'and month:', this.month);
-    // Implementar logica del filtro
+  loadLiquidations() {
+    if (this.year && this.month) {
+      this.isLoading = true;
+      this.apiLiquidacionesSummary.getSummaryYearMonths(this.year, this.month.id).subscribe({
+        next: (data) => {
+          this.liquidations = data;
+          console.log('Liquidations loaded:', this.liquidations);
+          this.isLoading = false;
+        },
+        error: (error) => {
+          console.error('Error loading liquidations:', error);
+          this.isLoading = false;
+        }
+      });
+    }
   }
 
-  // downloadPDF(dayCard: DayCard) {
-  //   console.log('Downloading PDF for', dayCard.day);
-  // }
-
-  // viewDetails(dayCard: DayCard) {
-  //   console.log('Viewing details for', dayCard.day);
-  // }
-  
-
-  
+  onFilter(selectedYear: number, selectedMonth: Month) {
+    console.log('Filtering with year:', selectedYear, 'and month:', selectedMonth.id);
+    this.year = selectedYear;
+    this.month = selectedMonth;
+    this.loadLiquidations();
+  }
+  viewDetail(card: any) {
+    this.router.navigate(['/detail', this.year, this.month.id, card.dia]);
+  }
 }
-
-
-
