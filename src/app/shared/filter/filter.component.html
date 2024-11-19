@@ -1,10 +1,15 @@
 <div class="filters container">
-    <p class="filer-label">FILTROS:</p>
-    <select [(ngModel)]="selectedYear" class="filter-select">
-        <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+    <p style="margin: 0 8px 2px 0" class="filer-label">FILTROS:</p>
+    <select [(ngModel)]="selectedYear" class="filter-select" aria-label="Seleccionar año" [disabled]="isLoading">
+        <option *ngFor="let year of years" [ngValue]="year">{{ year }}</option>
     </select>
-    <select [(ngModel)]="selectedMonth" class="filter-select">
-        <option *ngFor="let month of months" [value]="month">{{ month }}</option>
-      </select>
-      <button (click)="onFilter()" class="filter-button">Filtrar</button>
+    <select [(ngModel)]="selectedMonth" class="filter-select" aria-label="Seleccionar mes" [disabled]="isLoading">
+        <option *ngFor="let month of months" [ngValue]="month">{{ month.name }}</option>
+    </select>
+    <select *ngIf="showDayFilter" [(ngModel)]="selectedDay" class="filter-select" aria-label="Seleccionar día" [disabled]="isLoading">
+        <option *ngFor="let day of days" [ngValue]="day">{{ day }}</option>
+    </select>
+    <button (click)="onFilter()" class="filter-button" [disabled]="isLoading">
+        {{ isLoading ? 'Cargando...' : 'Filtrar' }}
+    </button>
 </div>

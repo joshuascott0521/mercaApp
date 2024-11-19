@@ -1,6 +1,5 @@
 <div class="dashboard">
   <!-- Header -->
-
   <app-header [nombreUsuario]="nombreUsuario"></app-header>
 
   <!-- FILTRO -->
@@ -9,16 +8,19 @@
   [months]="months" 
   [selectedYear]="year" 
   [selectedMonth]="month" 
-  (filter)="onFilter()">
+  [isLoading]="isLoading"
+  (filter)="onFilter($event.year, $event.month)">
   </app-filter>
+    <!-- Loading Component -->
+    <app-loading [isLoading]="isLoading"></app-loading>
 
   <!-- CARD LIQUIDACIONES POR DIA -->
   <div class="cards-grid container">
     <div class="card" *ngFor="let card of liquidations">
       <div class="card-header">
         <h2>{{ card.dia }} - {{ card.diaSemana }}</h2>
-        <span class="status" [ngClass]="{'closed': card.status === 'CERRADO', 'open': card.status === 'ABIERTO'}">
-          {{ card.status }}
+        <span class="status" [ngClass]="{'closed': card.estado === 'CERRADO', 'open': card.estado === 'ABIERTO'}">
+          {{ card.estado }}
         </span>
       </div>
       <div class="card-content">
@@ -39,7 +41,7 @@
         <button class="card-button">
           <i class="fas fa-download"></i> PDF
         </button>
-        <button class="card-button">
+        <button (click)="viewDetail(card)" class="card-button">
           <i class="fas fa-eye"></i> Ver Detalle
         </button>
       </div>

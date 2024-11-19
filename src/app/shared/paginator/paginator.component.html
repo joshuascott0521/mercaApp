@@ -1,0 +1,20 @@
+<div class="paginator-container">
+    <div class="paginator-info">
+      Mostrando {{ startIndex + 1 }} - {{ endIndex }} de {{ totalItems }} items
+    </div>
+    <div class="paginator-controls">
+      <button 
+        class="paginator-button" 
+        [disabled]="currentPage === 0"
+        (click)="onPageChange(currentPage - 1)">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <span class="page-number">Página {{ currentPage + 1 }}</span>
+      <button 
+        class="paginator-button" 
+        [disabled]="endIndex >= totalItems"
+        (click)="onPageChange(currentPage + 1)">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+  </div>
