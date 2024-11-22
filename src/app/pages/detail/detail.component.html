@@ -1,49 +1,24 @@
 <div class="detail-view">
-    <app-header [nombreUsuario]="nombreUsuario"></app-header>
-  
-    <app-filter 
-      [years]="years" 
-      [months]="months"
-      [days]="days"
-      [selectedYear]="year"
-      [selectedMonth]="month"
-      [selectedDay]="day"
-      [showDayFilter]="true"
-      [isLoading]="isLoading"
-      (filter)="onFilter($event)">
-    </app-filter>
-  
-    <app-loading [isLoading]="isLoading"></app-loading>
-  
-    <div class="cards-grid container">
-      <div class="card payment-card" *ngFor="let payment of payments">
-        <div class="card-header">
-          <div class="header-info">
-            <p class="id">CC: {{ payment.cc }}</p>
-            <p class="name">{{ payment.name }}</p>
-          </div>
-          <span class="status" [ngClass]="payment.status.toLowerCase()">
-            {{ payment.status }}
-          </span>
-        </div>
-        <div class="card-content">
-          <div class="info-row">
-            <span class="label">No:</span>
-            <span class="value">{{ payment.number }}</span>
-          </div>
-          <div class="info-row">
-            <span class="label">Fecha:</span>
-            <span class="value">{{ payment.date }}</span>
-          </div>
-          <div class="info-row">
-            <span class="label">Local:</span>
-            <span class="value">{{ payment.local }}</span>
-          </div>
-          <div class="info-row">
-            <span class="label">Monto:</span>
-            <span class="value">${{ payment.amount | number:'1.0-0' }}</span>
-          </div>
-        </div>
-      </div>
+  <app-header [nombreUsuario]="nombreUsuario"></app-header>
+
+  <app-filter 
+    [years]="years" 
+    [months]="months"
+    [days]="days"
+    [selectedYear]="year"
+    [selectedMonth]="month"
+    [selectedDay]="day"
+    [showDayFilter]="true"
+    [isLoading]="isLoading"
+    (filter)="onFilter($event)">
+  </app-filter>
+
+  <app-loading [isLoading]="isLoading"></app-loading>
+
+  <div class="container">
+    <div class="cards-grid">
+      <app-payment-card *ngFor="let payment of payments" [payment]="payment"></app-payment-card>
+      <button *ngIf="showButtton" (click)="onScrollTop()" class="button-scroll"><i class="fa-solid fa-up-long"></i></button>
     </div>
   </div>
+</div>

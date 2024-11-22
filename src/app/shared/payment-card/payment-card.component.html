@@ -1,0 +1,17 @@
+<div class="payment-card" [ngClass]="payment.estado.toLowerCase()">
+    <div class="card-header">
+      <span class="consecutivo">{{ payment.consecutivo }}</span>
+      <span class="estado">{{ payment.estado }}</span>
+    </div>
+    <div class="card-body">
+      <p class="nombre">{{ payment.nombreContribuyente }}</p>
+      <p class="documento">CC: {{ payment.documentoContribuyente }}</p>
+      <p class="fecha">{{ payment.fechaVencimiento | date:'dd MMM yyyy' }}</p>
+      <p class="local">Local: {{ payment.local }}</p>
+      <p class="monto">${{ payment.valorTotal | number:'1.0-0' }}</p>
+    </div>
+    <div class="card-footer">
+      <span class="dias">{{ payment.cantidadDias }} día(s)</span>
+      <span class="codigo">{{ payment.codigo }}</span>
+    </div>
+  </div>

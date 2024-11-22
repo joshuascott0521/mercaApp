@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit {
   liquidations: any[] = []; 
   years: number[] = [];
   months: Month[] = [];
-  isLoading: boolean = false;
+  isLoading: boolean = true;
 
   constructor(
     private authService: AuthService,

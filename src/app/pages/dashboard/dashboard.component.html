@@ -1,3 +1,5 @@
+<!-- Loading Component -->
+<app-loading [isLoading]="isLoading"></app-loading>
 <div class="dashboard">
   <!-- Header -->
   <app-header [nombreUsuario]="nombreUsuario"></app-header>
@@ -11,8 +13,6 @@
   [isLoading]="isLoading"
   (filter)="onFilter($event.year, $event.month)">
   </app-filter>
-    <!-- Loading Component -->
-    <app-loading [isLoading]="isLoading"></app-loading>
 
   <!-- CARD LIQUIDACIONES POR DIA -->
   <div class="cards-grid container">
@@ -39,7 +39,7 @@
       </div>
       <div class="card-footer">
         <button class="card-button">
-          <i class="fas fa-download"></i> PDF
+          <i class="fas fa-download"></i>.XLS
         </button>
         <button (click)="viewDetail(card)" class="card-button">
           <i class="fas fa-eye"></i> Ver Detalle
