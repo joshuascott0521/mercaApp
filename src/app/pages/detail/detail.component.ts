@@ -8,11 +8,11 @@ interface Month {
   name: string;
 }
 
+
 @Component({
   selector: 'app-detail',
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.scss'],
-  
 })
 export class DetailComponent implements OnInit {
   year!: number;
@@ -26,7 +26,6 @@ export class DetailComponent implements OnInit {
   isLoading: boolean = false;
   datosResumen: any;
   showButton: boolean = false;
-  
 
   private scrollHeight = 300;
   private pageNumber = 1;
@@ -47,7 +46,7 @@ export class DetailComponent implements OnInit {
     
     this.route.params.subscribe((params) => {
       console.log('params', params);
-      this.year = +params['year'];
+      this.year = params['year'];
       this.month = +params['month'];
       this.day = +params['day'];
       this.resetPagination();
@@ -58,13 +57,17 @@ export class DetailComponent implements OnInit {
 
   getDetailDays() {
     if (!this.hasMoreData) return;
-
+    
     this.isLoading = true;
     this.getDetails.getDetailDays(this.year, this.month, this.day, this.pageNumber, this.pageSize).subscribe({
       next: (data) => {
         console.log("Received data:", data);
         if (data.length < this.pageSize) {
+        this.dataFilter()
+
           this.hasMoreData = false;
+        console.log("Received data:", this.month);
+
         }
         this.payments = [...this.payments, ...data];
         this.isLoading = false;
@@ -81,7 +84,7 @@ export class DetailComponent implements OnInit {
   dataFilter() {
     this.apiGetFilter.getDataFilter().subscribe(
       (data) => {
-        console.log('Filter data:', data);
+        console.log('Filter data:✅✅', data);
         
         this.years = data.years;
         this.months = data.months;
@@ -91,18 +94,23 @@ export class DetailComponent implements OnInit {
         this.month = this.months[0];
 
         this.days = Array.from({ length: 31 }, (_, i) => i + 1);
+        // Load initial data
+        // this.loadLiquidations();
       },
       (error) => {
         console.error('Error fetching filter data:', error);
       }
     );
   }
-  // dataFilter
-  onFilter(event: { year: number; month: any; day?: number }) {
+
+
+  onFilter(event: { year: number; month: Month; day?: number }) {
     this.year = event.year;
     this.month = event.month.id;
     this.day = event.day || this.day;
-    this.getMonthName(this.month)
+    this.months = this.months
+    console.log('✅✅✅✅',this.months);
+    
 
     console.log('Filtered data:', this.year, this.month, this.day);
     
@@ -137,13 +145,6 @@ export class DetailComponent implements OnInit {
     }
   }
 
-  // getMonthName(monthNumber: number): string {
-  //   const monthNames = [
-  //     'ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO',
-  //     'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE'
-  //   ];
-  //   return monthNames[monthNumber - 1] || '';
-  // }
   getMonthName(monthNumber: number): string {
     const monthNames = [
       'ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO',
@@ -151,8 +152,7 @@ export class DetailComponent implements OnInit {
     ];
     return monthNames[monthNumber - 1] || '';
   }
-
-  // getSelectedMonth(): Month {
-  //   return this.months.find(m => m.id === this.month) || { id: this.month, name: this.getMonthName(this.month) };
-  // }
+  getSelectedMonth(): Month {
+    return this.months.find(m => m.id === this.month) || { id: this.month, name: this.getMonthName(this.month) };
+  }
 }

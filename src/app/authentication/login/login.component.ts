@@ -43,7 +43,6 @@ export class LoginComponent implements OnInit {
     }
 
     this.loading = true;
-    console.log('AQUIIIIII',this.loginForm);
     
     this.authService.login(this.f['correo'].value, this.f['password'].value)
       .pipe(first())

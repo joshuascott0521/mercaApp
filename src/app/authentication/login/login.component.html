@@ -7,41 +7,31 @@
                         <img src="assets/img/logo_baranoa-removebg-preview.png" alt="alcaldia de baranoa"
                             class="logo-baranoa">
                     </div>
-
                 </div>
 
                 <div class="titulo">
                     <span class="book-text">Iniciar Sesion</span>
                 </div>
                 <form id="loginform" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-                    <!-- Campo de Correo -->
                     <div class="input-container">
                         <i class="icon fa-regular fa-user"></i>
-                        <!-- <input for="correo" type="text" id="correo" formGroupName="correo" placeholder="Correo"
-                            required /> -->
-                            <input type="text" formControlName="correo" class="form-control"  required />
+                        <input type="text" formControlName="correo" class="form-control" required />
                     </div>
 
-
-                    <!-- Campo de Contraseña -->
                     <div class="input-container">
                         <i class="icon fa-solid fa-lock"></i>
-                        <!-- <input type="password" id="password" formGroupName="password" placeholder="Contraseña"
-                            required /> -->
-                            <input type="password" formControlName="password" class="form-control" required />
-
+                        <input type="password" formControlName="password" class="form-control" required />
                     </div>
 
                     <div class="content-btn">
-
-                        <button [disabled]="loading" style="background-color: #004755; color: white;  cursor: pointer; font-weight: bold;"
-                            type="submit">Ingresar</button>
+                        <button [disabled]="loading" style="background-color: #004755; color: white; cursor: pointer; font-weight: bold;"
+                            type="submit">
+                            <span *ngIf="!loading">Ingresar</span>
+                            <span *ngIf="loading" class="spinner"></span>
+                        </button>
                     </div>
-
                 </form>
-
             </div>
-
         </div>
     </div>
 </div>
