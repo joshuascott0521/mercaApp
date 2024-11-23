@@ -35,3 +35,15 @@
     }
   }
 }
+
+@media (max-width:450px) {
+  .filters{
+    flex-wrap: wrap;
+    .filter-button{
+      margin-top: 5px
+      ;
+    }
+  
+  
+}
+}

@@ -79,6 +79,7 @@ export class DashboardComponent implements OnInit {
     this.month = selectedMonth;
     this.loadLiquidations();
   }
+
   viewDetail(card: any) {
     this.router.navigate(['/detail', this.year, this.month.id, card.dia]);
   }

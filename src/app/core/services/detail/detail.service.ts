@@ -7,16 +7,13 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class DetailService {
-  private apiUrl  = environment.apiUrl;
+  private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) { }
-  getCharacterBypage(pageNumber:number):any{
-    
-  }
 
-  getDetailDays(ano: number, mes: number, dia: number): Observable<any>{
+  getDetailDays(ano: number, mes: number, dia: number, pageNumber: number = 1, pageSize: number = 10): Observable<any> {
     const endPoint = `/liquidaciones/byAnoMesDia`;
-    const url = `${this.apiUrl}${endPoint}?ano=${ano}&mes=${mes}&dia=${dia}`;
+    const url = `${this.apiUrl}${endPoint}?ano=${ano}&mes=${mes}&dia=${dia}&pageNumber=${pageNumber}&pageSize=${pageSize}`;
     return this.http.get(url);
   }
 }

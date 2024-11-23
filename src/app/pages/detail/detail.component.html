@@ -1,24 +1,36 @@
 <div class="detail-view">
   <app-header [nombreUsuario]="nombreUsuario"></app-header>
 
-  <app-filter 
-    [years]="years" 
-    [months]="months"
-    [days]="days"
-    [selectedYear]="year"
-    [selectedMonth]="month"
-    [selectedDay]="day"
-    [showDayFilter]="true"
-    [isLoading]="isLoading"
-    (filter)="onFilter($event)">
-  </app-filter>
-
-  <app-loading [isLoading]="isLoading"></app-loading>
-
   <div class="container">
-    <div class="cards-grid">
+    
+    <app-filter 
+      [years]="years" 
+      [months]="months"
+      [days]="days"
+      [selectedYear]="year"
+      [selectedMonth]="month"
+      [selectedDay]="day"
+      [showDayFilter]="true"
+      [isLoading]="isLoading"
+      (filter)="onFilter($event)">
+    </app-filter>
+    
+    <button (click)="backToDashboard()" class="back-button">
+      <i class="fas fa-arrow-left"></i> Volver al Dashboard
+    </button>
+    <app-loading [isLoading]="isLoading"></app-loading>
+
+    <div class="cards-grid"
+      infiniteScroll
+      [infiniteScrollDistance]="2"
+      [infiniteScrollThrottle]="50"
+      (scrolled)="onScrollDown()"
+    >
       <app-payment-card *ngFor="let payment of payments" [payment]="payment"></app-payment-card>
-      <button *ngIf="showButtton" (click)="onScrollTop()" class="button-scroll"><i class="fa-solid fa-up-long"></i></button>
     </div>
   </div>
+
+  <button *ngIf="showButton" (click)="onScrollTop()" class="button-scroll">
+    <i class="fa-solid fa-up-long"></i>
+  </button>
 </div>

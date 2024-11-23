@@ -6,7 +6,7 @@
     <select [(ngModel)]="selectedMonth" class="filter-select" aria-label="Seleccionar mes" [disabled]="isLoading">
         <option *ngFor="let month of months" [ngValue]="month">{{ month.name }}</option>
     </select>
-    <select *ngIf="showDayFilter" [(ngModel)]="selectedDay" class="filter-select" aria-label="Seleccionar día" [disabled]="isLoading">
+    <select *ngIf="showDayFilter" [(ngModel)]="selectedDay" class="filter-select " aria-label="Seleccionar día" [disabled]="isLoading">
         <option *ngFor="let day of days" [ngValue]="day">{{ day }}</option>
     </select>
     <button (click)="onFilter()" class="filter-button" [disabled]="isLoading">
