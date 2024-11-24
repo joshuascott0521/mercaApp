@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { FilterService } from 'src/app/core/services/filter/filter.service';
 import { LiquidationsSummaryYeasMonthsService } from 'src/app/core/services/liquidations/liquidations-summary-yeas-months.service';
+import { LiquidationsExportService } from 'src/app/core/services/liquidationsExport/liquidations-export.service';
 
 interface Month {
   id: number;
@@ -27,7 +28,8 @@ export class DashboardComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private apiLiquidacionesSummary: LiquidationsSummaryYeasMonthsService,
-    private apiGetFilter: FilterService
+    private apiGetFilter: FilterService,
+    private liquidationsExportService: LiquidationsExportService
   ) { }
 
   ngOnInit(): void {
@@ -83,4 +85,49 @@ export class DashboardComponent implements OnInit {
   viewDetail(card: any) {
     this.router.navigate(['/detail', this.year, this.month.id, card.dia]);
   }
+
+  exportYearMonthSummary() {
+    this.isLoading = true;
+    this.liquidationsExportService.exportSummaryByYearMonth(this.year, this.month.id)
+      .subscribe({
+        next: (blob: Blob) => {
+          const url = window.URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = `resumen_liquidaciones_${this.year}_${this.month.id}.xls`;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          window.URL.revokeObjectURL(url);
+          this.isLoading = false;
+        },
+        error: (error) => {
+          console.error('Error exporting year-month summary:', error);
+          this.isLoading = false;
+        }
+      });
+  }
+
+  exportDayDetail(day: number) {
+    this.isLoading = true;
+    this.liquidationsExportService.exportDetailByYearMonthDay(this.year, this.month.id, day)
+      .subscribe({
+        next: (blob: Blob) => {
+          const url = window.URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = `detalle_liquidaciones_${this.year}_${this.month.id}_${day}.xls`;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          window.URL.revokeObjectURL(url);
+          this.isLoading = false;
+        },
+        error: (error) => {
+          console.error('Error exporting day detail:', error);
+          this.isLoading = false;
+        }
+      });
+  }
 }
+

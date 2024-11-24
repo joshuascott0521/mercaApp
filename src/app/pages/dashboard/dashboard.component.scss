@@ -149,3 +149,24 @@ $border-radius: 8px;
     }
   }
 }
+.export-button {
+  margin-left: 20px;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: $primary-color;
+  color: white;
+  border: none;
+  border-radius: $border-radius;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: darken($primary-color, 10%);
+  }
+
+  &:disabled {
+    background-color: $secondary-color;
+    cursor: not-allowed;
+  }
+}

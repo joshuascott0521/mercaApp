@@ -14,6 +14,11 @@
   (filter)="onFilter($event.year, $event.month)">
   </app-filter>
 
+  <!-- Botón para exportar resumen de año y mes -->
+  <button (click)="exportYearMonthSummary()" class="export-button" [disabled]="isLoading">
+    Exportar Resumen (Año y Mes)
+  </button>
+
   <!-- CARD LIQUIDACIONES POR DIA -->
   <div class="cards-grid container">
     <div class="card" *ngFor="let card of liquidations">
@@ -38,7 +43,7 @@
         </div>
       </div>
       <div class="card-footer">
-        <button class="card-button">
+        <button (click)="exportDayDetail(card.dia)" class="card-button">
           <i class="fas fa-download"></i>.XLS
         </button>
         <button (click)="viewDetail(card)" class="card-button">
@@ -48,3 +53,4 @@
     </div>
   </div>
 </div>
+

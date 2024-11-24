@@ -20,11 +20,21 @@ export class FilterComponent {
   @Input() showDayFilter: boolean = false;
   @Input() isLoading: boolean = false;
   @Output() filter = new EventEmitter<{year: number, month: Month, day?: number}>();
+  @Output() filterYearMonth = new EventEmitter<{year: number, month: Month}>();
 
   onFilter(){
-    this.filter.emit({year: this.selectedYear,
-       month: this.selectedMonth,
-       day: this.showDayFilter ? this.selectedDay : undefined
-      });
+    this.filter.emit({
+      year: this.selectedYear,
+      month: this.selectedMonth,
+      day: this.showDayFilter ? this.selectedDay : undefined
+    });
+  }
+
+  onFilterYearMonth() {
+    this.filterYearMonth.emit({
+      year: this.selectedYear,
+      month: this.selectedMonth
+    });
   }
 }
+

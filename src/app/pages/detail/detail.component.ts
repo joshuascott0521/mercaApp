@@ -6,6 +6,7 @@ import { FilterService } from 'src/app/core/services/filter/filter.service';
 interface Month {
   id: number;
   name: string;
+  days: number[]
 }
 
 
@@ -52,6 +53,7 @@ export class DetailComponent implements OnInit {
       this.resetPagination();
       this.getDetailDays();
       this.dataFilter();
+      this.getNameDaysForId(this.months,this.month.id)
     });
   }
 
@@ -84,14 +86,15 @@ export class DetailComponent implements OnInit {
   dataFilter() {
     this.apiGetFilter.getDataFilter().subscribe(
       (data) => {
-        console.log('Filter data:✅✅', data);
+        console.log('Filter data:✅✅', data.months);
         
         this.years = data.years;
         this.months = data.months;
+        console.log('meses:::::', this.months);
         
         // Set default values
         this.year = this.years[0];
-        this.month = this.months[0];
+        this.month = this.months;
 
         this.days = Array.from({ length: 31 }, (_, i) => i + 1);
         // Load initial data
@@ -104,14 +107,19 @@ export class DetailComponent implements OnInit {
   }
 
 
-  onFilter(event: { year: number; month: Month; day?: number }) {
+  onFilter(event: { year: number; month: any; day?: number }) {
     this.year = event.year;
     this.month = event.month.id;
+    console.log('IDDDDDD', event.month.id);
+
+    
     this.day = event.day || this.day;
     this.months = this.months
     console.log('✅✅✅✅',this.months);
     
-
+    const prueba = this.getNameDaysForId(this.months, event.month.id)
+    console.log('ESTA ES LA  PRUEBAAAA', prueba);
+    
     console.log('Filtered data:', this.year, this.month, this.day);
     
     this.resetPagination();
@@ -155,4 +163,8 @@ export class DetailComponent implements OnInit {
   getSelectedMonth(): Month {
     return this.months.find(m => m.id === this.month) || { id: this.month, name: this.getMonthName(this.month) };
   }
+
+  getNameDaysForId(array: Month[], idBuscado: number): { name: string; days: number[] } | null {
+    const mes = array.find((mes) => mes.id === idBuscado);
+    return mes ? { name: mes.name, days: mes.days } : null;}
 }
