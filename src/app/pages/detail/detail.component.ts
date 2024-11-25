@@ -106,10 +106,8 @@ export class DetailComponent implements OnInit {
       }
     );
   }
-  
-  
-  
 
+  private isMonthChanging = false; // Bandera para identificar si el cambio proviene de un cambio de mes
 
   onFilter(event: { year: number; month: any; day?: number }) {
     // Actualizar el año y el mes seleccionados
@@ -124,12 +122,19 @@ export class DetailComponent implements OnInit {
       this.days = this.month.days;
       console.log('Días actualizados para el mes seleccionado:', this.days);
   
-      // Opcional: reiniciar el día seleccionado
-      this.day = this.days[0];
+      // Seleccionar el día menor de la nueva colección de días
+      this.day = Math.min(...this.days);
+      console.log('Nuevo día seleccionado automáticamente:', this.day);
+  
+      // Indicar que el cambio de día proviene de un cambio de mes
+      this.isMonthChanging = true;
+
+      this.resetPagination();
+      this.getDetailDays();
     }
   
-    // Si cambia el día, recargar las cards
-    if (event.day && this.day !== event.day) {
+    // Si cambia el día (y no es por un cambio de mes), recargar las cards
+    if (!this.isMonthChanging && event.day && this.day !== event.day) {
       this.day = event.day;
       console.log('Filtrando por día:', this.day);
   
@@ -137,11 +142,14 @@ export class DetailComponent implements OnInit {
       this.getDetailDays();
     }
   
+    // Resetear la bandera después de manejar el cambio de mes
+    if (this.isMonthChanging) {
+      this.isMonthChanging = false;
+    }
+  
     console.log('Datos seleccionados:', this.year, this.month, this.day);
   }
   
-  
-
   resetPagination() {
     this.pageNumber = 1;
     this.payments = [];

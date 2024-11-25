@@ -32,9 +32,10 @@ export class FilterComponent {
         day: this.selectedDay
       });
     } else {
-      this.filterYearMonth.emit({
+      this.filter.emit({
         year: this.selectedYear,
-        month: this.selectedMonth
+        month: this.selectedMonth,
+        day: this.selectedDay
       });
     }
 
