@@ -15,7 +15,8 @@ export class AuthService {
   private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient, private router: Router) {
-    this.currentUserSubject = new BehaviorSubject<User | null>(JSON.parse(localStorage.getItem('currentUser') || 'null'));
+    const storedUser = localStorage.getItem('currentUser');
+    this.currentUserSubject = new BehaviorSubject<User | null>(storedUser ? JSON.parse(storedUser) : null);
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
@@ -26,6 +27,7 @@ export class AuthService {
   login(correo: string, password: string): Observable<User> {
     return this.http.post<User>(`${this.apiUrl}/usuario/Login`, { correo, password })
       .pipe(map(user => {
+        localStorage.setItem('currentUser', JSON.stringify(user));
         localStorage.setItem('nombreUsuario', user.nombre);
         localStorage.setItem('token', user.token,);
         this.currentUserSubject.next(user);
@@ -41,6 +43,8 @@ export class AuthService {
   }
 
   isAuthenticated(): boolean {
-    return !!this.currentUserValue;
+    const token = localStorage.getItem('token');
+    return !!token; 
   }
+  
 }

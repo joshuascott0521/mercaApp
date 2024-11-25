@@ -47,29 +47,28 @@ export class DetailComponent implements OnInit {
     
     this.route.params.subscribe((params) => {
       console.log('params', params);
-      this.year = params['year'];
+      this.year = +params['year'];
       this.month = +params['month'];
       this.day = +params['day'];
+  
       this.resetPagination();
       this.getDetailDays();
-      this.dataFilter();
-      this.getNameDaysForId(this.months,this.month.id)
+      this.dataFilter(); // Inicializa los datos del filtro
     });
   }
 
   getDetailDays() {
     if (!this.hasMoreData) return;
-    
+  
     this.isLoading = true;
-    this.getDetails.getDetailDays(this.year, this.month, this.day, this.pageNumber, this.pageSize).subscribe({
+  
+    // Enviar solo el id del mes
+    const monthId = this.month?.id || this.month;
+  
+    this.getDetails.getDetailDays(this.year, monthId, this.day, this.pageNumber, this.pageSize).subscribe({
       next: (data) => {
-        console.log("Received data:", data);
         if (data.length < this.pageSize) {
-        this.dataFilter()
-
           this.hasMoreData = false;
-        console.log("Received data:", this.month);
-
         }
         this.payments = [...this.payments, ...data];
         this.isLoading = false;
@@ -81,50 +80,67 @@ export class DetailComponent implements OnInit {
       },
     });
   }
+  
 
   
   dataFilter() {
     this.apiGetFilter.getDataFilter().subscribe(
       (data) => {
-        console.log('Filter data:✅✅', data.months);
-        
+        console.log('Filter data:✅✅', data);
+  
         this.years = data.years;
         this.months = data.months;
-        console.log('meses:::::', this.months);
-        
-        // Set default values
-        this.year = this.years[0];
-        this.month = this.months;
-
-        this.days = Array.from({ length: 31 }, (_, i) => i + 1);
-        // Load initial data
-        // this.loadLiquidations();
+  
+        // Buscar y asignar el mes inicial basado en los parámetros
+        const selectedMonth = this.months.find((m) => m.id === this.month);
+        this.month = selectedMonth ? selectedMonth : this.months[0];
+  
+        // Inicializar los días del mes seleccionado
+        this.days = this.month.days;
+  
+        console.log('Mes inicial:', this.month);
+        console.log('Días del mes inicial:', this.days);
       },
       (error) => {
         console.error('Error fetching filter data:', error);
       }
     );
   }
+  
+  
+  
 
 
   onFilter(event: { year: number; month: any; day?: number }) {
+    // Actualizar el año y el mes seleccionados
     this.year = event.year;
-    this.month = event.month.id;
-    console.log('IDDDDDD', event.month.id);
-
-    
-    this.day = event.day || this.day;
-    this.months = this.months
-    console.log('✅✅✅✅',this.months);
-    
-    const prueba = this.getNameDaysForId(this.months, event.month.id)
-    console.log('ESTA ES LA  PRUEBAAAA', prueba);
-    
-    console.log('Filtered data:', this.year, this.month, this.day);
-    
-    this.resetPagination();
-    this.getDetailDays();
+  
+    // Detectar si cambió el mes y actualizar los días correspondientes
+    if (event.month && event.month.id !== this.month?.id) {
+      const selectedMonth = this.months.find((m) => m.id === event.month.id);
+      this.month = selectedMonth ? selectedMonth : this.month;
+  
+      // Actualizar los días del nuevo mes
+      this.days = this.month.days;
+      console.log('Días actualizados para el mes seleccionado:', this.days);
+  
+      // Opcional: reiniciar el día seleccionado
+      this.day = this.days[0];
+    }
+  
+    // Si cambia el día, recargar las cards
+    if (event.day && this.day !== event.day) {
+      this.day = event.day;
+      console.log('Filtrando por día:', this.day);
+  
+      this.resetPagination();
+      this.getDetailDays();
+    }
+  
+    console.log('Datos seleccionados:', this.year, this.month, this.day);
   }
+  
+  
 
   resetPagination() {
     this.pageNumber = 1;

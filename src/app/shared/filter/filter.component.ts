@@ -13,28 +13,32 @@ interface Month {
 export class FilterComponent {
   @Input() years: number[] = [];
   @Input() months: Month[] = [];
-  @Input() days: number[] = []
+  @Input() days: number[] = [];
   @Input() selectedYear!: number;
   @Input() selectedMonth!: Month;
   @Input() selectedDay?: number;
   @Input() showDayFilter: boolean = false;
   @Input() isLoading: boolean = false;
-  @Output() filter = new EventEmitter<{year: number, month: Month, day?: number}>();
-  @Output() filterYearMonth = new EventEmitter<{year: number, month: Month}>();
+  @Output() filter = new EventEmitter<{ year: number, month: Month, day?: number }>();
+  @Output() filterYearMonth = new EventEmitter<{ year: number, month: Month }>();
 
-  onFilter(){
-    this.filter.emit({
-      year: this.selectedYear,
-      month: this.selectedMonth,
-      day: this.showDayFilter ? this.selectedDay : undefined
-    });
-  }
+  // Emitir evento cuando cambie el año o el mes
+  onYearOrMonthChange() {
+    if (this.showDayFilter) {
+      console.log('Evento emitido:', this.selectedYear, this.selectedMonth, this.selectedDay);
+      this.filter.emit({
+        year: this.selectedYear,
+        month: this.selectedMonth,
+        day: this.selectedDay
+      });
+    } else {
+      this.filterYearMonth.emit({
+        year: this.selectedYear,
+        month: this.selectedMonth
+      });
+    }
 
-  onFilterYearMonth() {
-    this.filterYearMonth.emit({
-      year: this.selectedYear,
-      month: this.selectedMonth
-    });
+    
+    
   }
 }
-

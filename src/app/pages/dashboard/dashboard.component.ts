@@ -23,6 +23,8 @@ export class DashboardComponent implements OnInit {
   years: number[] = [];
   months: Month[] = [];
   isLoading: boolean = true;
+  selectYear!: number;
+  selectMonth!: number;
 
   constructor(
     private authService: AuthService,
@@ -30,12 +32,38 @@ export class DashboardComponent implements OnInit {
     private apiLiquidacionesSummary: LiquidationsSummaryYeasMonthsService,
     private apiGetFilter: FilterService,
     private liquidationsExportService: LiquidationsExportService
-  ) { }
+  ) { 
+
+  }
 
   ngOnInit(): void {
     this.nombreUsuario = localStorage.getItem('nombreUsuario') || '';
     this.dataFilter();
   }
+
+  getClosestMonth(currentYear: number, currentMonth: number): { year: number, month: Month } {
+    // Verificar si el año actual está en la lista
+    if (this.years.includes(currentYear)) {
+      // Filtrar meses del año actual
+      const availableMonths = this.months.filter(month => month.id <= currentMonth);
+      
+      // Si hay meses válidos, toma el más cercano
+      if (availableMonths.length > 0) {
+        return { year: currentYear, month: availableMonths[availableMonths.length - 1] };
+      }
+    }
+  
+    // Si no hay meses válidos en el año actual, tomar el mes más cercano del año anterior
+    const previousYear = Math.max(...this.years.filter(year => year < currentYear));
+    if (previousYear) {
+      const previousYearMonths = this.months.filter(month => month.id > 0); // Todos los meses
+      return { year: previousYear, month: previousYearMonths[previousYearMonths.length - 1] };
+    }
+  
+    // Por defecto, seleccionar el primer año y mes disponibles
+    return { year: this.years[0], month: this.months[0] };
+  }
+  
 
   dataFilter() {
     this.apiGetFilter.getDataFilter().subscribe(
@@ -45,11 +73,17 @@ export class DashboardComponent implements OnInit {
         this.years = data.years;
         this.months = data.months;
         
-        // Set default values
-        this.year = this.years[0];
-        this.month = this.months[0];
-
-        // Load initial data
+        // Obtener fecha actual del servidor
+        const currentDate = new Date();
+        const currentYear = currentDate.getFullYear();
+        const currentMonth = currentDate.getMonth() + 1;
+  
+        // Obtener el mes y año iniciales
+        const closestDate = this.getClosestMonth(currentYear, currentMonth);
+        this.year = closestDate.year;
+        this.month = closestDate.month;
+  
+        // Cargar datos iniciales
         this.loadLiquidations();
       },
       (error) => {
@@ -57,6 +91,7 @@ export class DashboardComponent implements OnInit {
       }
     );
   }
+  
 
   loadLiquidations() {
     if (this.year && this.month) {
@@ -76,11 +111,16 @@ export class DashboardComponent implements OnInit {
   }
 
   onFilter(selectedYear: number, selectedMonth: Month) {
-    console.log('Filtering with year:', selectedYear, 'and month:', selectedMonth.id);
-    this.year = selectedYear;
-    this.month = selectedMonth;
-    this.loadLiquidations();
+    if (this.year !== selectedYear || this.month.id !== selectedMonth.id) {
+      console.log('Año o mes cambiado:', selectedYear, selectedMonth.id);
+      this.year = selectedYear;
+      this.month = selectedMonth;
+  
+      // Ejecutar procedimiento para actualizar las cards
+      this.loadLiquidations();
+    }
   }
+  
 
   viewDetail(card: any) {
     this.router.navigate(['/detail', this.year, this.month.id, card.dia]);

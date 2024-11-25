@@ -1,56 +1,49 @@
 <!-- Loading Component -->
 <app-loading [isLoading]="isLoading"></app-loading>
 <div class="dashboard">
-  <!-- Header -->
-  <app-header [nombreUsuario]="nombreUsuario"></app-header>
+    <!-- Header -->
+    <app-header [nombreUsuario]="nombreUsuario"></app-header>
 
-  <!-- FILTRO -->
-  <app-filter 
-  [years]="years" 
-  [months]="months" 
-  [selectedYear]="year" 
-  [selectedMonth]="month" 
-  [isLoading]="isLoading"
-  (filter)="onFilter($event.year, $event.month)">
-  </app-filter>
+    <!-- FILTRO -->
+    <app-filter [years]="years" [months]="months" [selectedYear]="year" [selectedMonth]="month" [isLoading]="isLoading" (filterYearMonth)="onFilter($event.year, $event.month)">
+    </app-filter>
 
-  <!-- Botón para exportar resumen de año y mes -->
-  <button (click)="exportYearMonthSummary()" class="export-button" [disabled]="isLoading">
+    <!-- Botón para exportar resumen de año y mes -->
+    <button (click)="exportYearMonthSummary()" class="export-button" [disabled]="isLoading">
     Exportar Resumen (Año y Mes)
   </button>
 
-  <!-- CARD LIQUIDACIONES POR DIA -->
-  <div class="cards-grid container">
-    <div class="card" *ngFor="let card of liquidations">
-      <div class="card-header">
-        <h2>{{ card.dia }} - {{ card.diaSemana }}</h2>
-        <span class="status" [ngClass]="{'closed': card.estado === 'CERRADO', 'open': card.estado === 'ABIERTO'}">
+    <!-- CARD LIQUIDACIONES POR DIA -->
+    <div class="cards-grid container">
+        <div class="card" *ngFor="let card of liquidations">
+            <div class="card-header">
+                <h2>{{ card.dia }} - {{ card.diaSemana }}</h2>
+                <span class="status" [ngClass]="{'closed': card.estado === 'CERRADO', 'open': card.estado === 'ABIERTO'}">
           {{ card.estado }}
         </span>
-      </div>
-      <div class="card-content">
-        <div class="stat">
-          <div class="stat-circle orange">{{ card.cantidadLiquidada }}</div>
-          <p class="stat-amount orange">${{ card.totalLiquidado | number:'1.0-0' }}</p>
-        </div>
-        <div class="stat">
-          <div class="stat-circle green">{{ card.cantidadPagada }}</div>
-          <p class="stat-amount green">${{ card.totalPagado | number:'1.0-0' }}</p>
-        </div>
-        <div class="stat">
-          <div class="stat-circle red">{{ card.cantidadPendiente }}</div>
-          <p class="stat-amount red">${{ card.totalPendiente | number:'1.0-0' }}</p>
-        </div>
-      </div>
-      <div class="card-footer">
-        <button (click)="exportDayDetail(card.dia)" class="card-button">
+            </div>
+            <div class="card-content">
+                <div class="stat">
+                    <div class="stat-circle orange">{{ card.cantidadLiquidada }}</div>
+                    <p class="stat-amount orange">${{ card.totalLiquidado | number:'1.0-0' }}</p>
+                </div>
+                <div class="stat">
+                    <div class="stat-circle green">{{ card.cantidadPagada }}</div>
+                    <p class="stat-amount green">${{ card.totalPagado | number:'1.0-0' }}</p>
+                </div>
+                <div class="stat">
+                    <div class="stat-circle red">{{ card.cantidadPendiente }}</div>
+                    <p class="stat-amount red">${{ card.totalPendiente | number:'1.0-0' }}</p>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button (click)="exportDayDetail(card.dia)" class="card-button">
           <i class="fas fa-download"></i>.XLS
         </button>
-        <button (click)="viewDetail(card)" class="card-button">
+                <button (click)="viewDetail(card)" class="card-button">
           <i class="fas fa-eye"></i> Ver Detalle
         </button>
-      </div>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
-
