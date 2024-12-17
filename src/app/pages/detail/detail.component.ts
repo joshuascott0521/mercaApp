@@ -157,7 +157,7 @@ export class DetailComponent implements OnInit {
   }
 
   backToDashboard() {
-    this.router.navigate(['/dashboard']);
+    this.router.navigate(['/liquidaciones']);
   }
 
   @HostListener('window:scroll')

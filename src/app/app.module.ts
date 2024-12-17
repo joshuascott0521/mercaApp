@@ -15,6 +15,7 @@ import { DetailComponent } from './pages/detail/detail.component';
 import { PaginatorComponent } from './shared/paginator/paginator.component';
 import { PaymentCardComponent } from './shared/payment-card/payment-card.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { ContributorComponent } from './pages/contributor/contributor.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     DetailComponent,
     PaginatorComponent,
     PaymentCardComponent,
+    ContributorComponent,
   ],
   imports: [
     AuthenticationModule,

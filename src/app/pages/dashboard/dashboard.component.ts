@@ -126,6 +126,7 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['/detail', this.year, this.month.id, card.dia]);
   }
 
+
   exportYearMonthSummary() {
     this.isLoading = true;
     this.liquidationsExportService.exportSummaryByYearMonth(this.year, this.month.id)

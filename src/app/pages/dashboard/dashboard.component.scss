@@ -30,6 +30,8 @@ $border-radius: 8px;
   font-family: Arial, sans-serif;
   background-color: $background-color;
   min-height: 100vh;
+  margin-top: 150px;
+  padding-top: 10px;
 }
 
 .container {
@@ -169,4 +171,100 @@ $border-radius: 8px;
     background-color: $secondary-color;
     cursor: not-allowed;
   }
+}
+
+@media (min-width: 1270px) {
+  .exportYearMonthSummary {
+    padding-left: 40px;
+    margin: 0 auto;
+    max-width: 1282px;
+  }
+}
+
+
+.cardSummaryYearMonth {
+  margin: 10px 11px;
+}
+.card-content-SummaryYearMonth {
+  display: flex;
+  justify-content: space-evenly;
+
+}
+.all-data {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 80px;
+  width: 100%;
+}
+
+.cardSummaryYearMonth{
+  margin: 10px auto;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background: white;
+  border-radius: 8px;
+  height: auto;
+  max-width: 1217px;
+}
+.SummaryMonth{
+  display: flex;
+  padding: 8px 0 0 20px;
+}
+@media (max-width: 1230px){
+  
+  .media-pc-summary{
+    margin: 10px 10px !important;
+  }
+
+}
+
+.bag-mont-select{
+  background: #ededed;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  max-width: 120px;
+  width: 100%;
+  margin-left: 5px;
+  align-items: center;
+}
+.bag-mont-select p{
+  margin: 0;
+}
+
+.status {
+  font-weight: bold;
+}
+.orange{
+
+  background-color: lighten($warning-color, 30%);
+  color: darken($warning-color, 10%);
+}
+.green{
+  background-color: #c4f1ce;
+  color: #28a745;
+}
+.red{
+
+  background-color: #f6cdd1;
+  color: #dc3545;
+
+}
+.align{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 0 3px;
+}
+.circleSummary{
+  width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex
+;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 18px;
+    margin: 0 auto 10px;
 }

@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   ) {
     // redirect to home if already logged in
     if (this.authService.currentUserValue) {
-      this.router.navigate(['/dashboard']);
+      this.router.navigate(['/liquidaciones']);
     }
   }
 
@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/liquidaciones']);
         },
         error => {
           this.error = 'Email o contraseña incorrectos';

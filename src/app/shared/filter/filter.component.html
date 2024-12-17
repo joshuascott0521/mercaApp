@@ -1,17 +1,68 @@
-<div class="filters container">
-    <p style="margin: 0 8px 2px 0" class="filer-label">FILTROS:</p>
-    <!-- Select de Año -->
-    <select [(ngModel)]="selectedYear" class="filter-select" aria-label="Seleccionar año" [disabled]="isLoading" (change)="onYearOrMonthChange()">
-        <option *ngFor="let year of years" [ngValue]="year">{{ year }}</option>
-    </select>
+<!-- FILTRO POR FECHA -->
+<div *ngIf="!showUserFilter" class="filters container media-pc-summary">
+  <p style="margin: 0 8px 2px 0" class="filer-label">FILTROS:</p>
+  <!-- Select de Año -->
+  <select
+    [(ngModel)]="selectedYear"
+    class="filter-select"
+    aria-label="Seleccionar año"
+    [disabled]="isLoading"
+    (change)="onYearOrMonthChange()"
+  >
+    <option *ngFor="let year of years" [ngValue]="year">{{ year }}</option>
+  </select>
 
-    <!-- Select de Mes -->
-    <select [(ngModel)]="selectedMonth" class="filter-select" aria-label="Seleccionar mes" [disabled]="isLoading" (change)="onYearOrMonthChange()">
-        <option *ngFor="let month of months" [ngValue]="month">{{ month.name }}</option>
-    </select>
+  <!-- Select de Mes -->
+  <select
+    [(ngModel)]="selectedMonth"
+    class="filter-select"
+    aria-label="Seleccionar mes"
+    [disabled]="isLoading"
+    (change)="onYearOrMonthChange()"
+  >
+    <option *ngFor="let month of months" [ngValue]="month">
+      {{ month.name }}
+    </option>
+  </select>
 
-    <!-- Select de Día (opcional) -->
-    <select *ngIf="showDayFilter" [(ngModel)]="selectedDay" class="filter-select" aria-label="Seleccionar día" [disabled]="isLoading" (change)="onYearOrMonthChange()">
-        <option *ngFor="let day of days" [ngValue]="day">{{ day }}</option>
-    </select>
+  <!-- Select de Día (opcional) -->
+  <select
+    *ngIf="showDayFilter"
+    [(ngModel)]="selectedDay"
+    class="filter-select"
+    aria-label="Seleccionar día"
+    [disabled]="isLoading"
+    (change)="onYearOrMonthChange()"
+  >
+    <option *ngFor="let day of days" [ngValue]="day">{{ day }}</option>
+  </select>
+</div>
+
+<!-- FILTRO POR DOCUMENTO Y USUARIO -->
+
+<div *ngIf="showUserFilter" class="filters container media-pc-summary">
+  <p style="margin: 0 8px 2px 0" class="filer-label">FILTROS:</p>
+  <div class="content-inputs">
+      <div class="doc-input">
+        <label class="label-mg" for="Documento">Documento</label>
+      <input
+        [(ngModel)]="document"
+        class="filter-select"
+        type="number"
+        placeholder="Documento"
+        [disabled]="isLoading"
+      />
+      </div>
+
+      <div class="name-input">
+        <label class="label-mg" for="Nombre">Nombre</label>
+      <input
+        [(ngModel)]="name"
+        class="filter-select"
+        type="text"
+        placeholder="Nombre"
+        [disabled]="isLoading"
+      />
+      </div>
+  </div>
 </div>

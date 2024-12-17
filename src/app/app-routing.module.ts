@@ -6,6 +6,7 @@ import { DetailComponent } from './pages/detail/detail.component';
 import { AuthGuard } from './core/auth/auth.guard';
 import { LogoutGuard } from './core/guards/logout/logout.guard';
 import { PreventDashboardReturnGuard } from './core/guards/prevent-dashboard-return/prevent-dashboard-return.guard';
+import { ContributorComponent } from './pages/contributor/contributor.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -15,9 +16,15 @@ const routes: Routes = [
     canActivate: [PreventDashboardReturnGuard]
   },
   {
-    path: 'dashboard',
+    path: 'liquidaciones',
     component: DashboardComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'contribuyente',
+    component: ContributorComponent,
+    // canActivate: [AuthGuard]
+
   },
   {
     path: 'detail/:year/:month/:day',

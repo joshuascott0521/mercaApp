@@ -18,4 +18,12 @@ export class HeaderComponent  {
     this.authService.logout();
     this.router.navigate(['/login']);
   }
+  viewContributor(){
+    this.router.navigate(['/contribuyente'])
+    console.log('cpfewkfnqekfnvwñegvlkwnañglk');
+    
+  }
+  viewLiquidaciones(){
+    this.router.navigate(['/liquidaciones'])
+  }
 }

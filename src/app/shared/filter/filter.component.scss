@@ -47,3 +47,39 @@
   
 }
 }
+
+@media (max-width: 1235px){
+  
+  .media-pc-summary{
+    margin: 10px 10px !important;
+  }
+  
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield; 
+}
+
+.label-mg{
+  margin-right: 5px;
+}
+.content-inputs{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 200px;
+    .filter-select{
+      width: 100%;
+      max-width: 250px;
+      border-radius: 5px;
+    }
+    .name-input, .doc-input{
+      display: flex;
+      align-items: center;
+    }
+  }

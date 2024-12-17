@@ -1,9 +1,14 @@
-@import '../../pages/dashboard/dashboard.component.scss';
+@import "../../pages/dashboard/dashboard.component.scss";
 
 .header {
   background-color: white;
   border-bottom: 1px solid $border-color;
   padding: 10px 0;
+  position: fixed;
+  top: 0; 
+  left: 0; 
+  width: 100%;
+  // z-index: 1000;
 
   .container {
     display: flex;
@@ -41,22 +46,68 @@
     }
 
     .avatar {
-      width: 40px;
-      height: 40px;
+      width: 30px;
+      height: 30px;
       background-color: $primary-color;
       color: white;
       border-radius: 50%;
       @include flex-center;
-      font-weight: bold;
+      font-weight: 600;
+      font-size: 12px;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+        sans-serif;
+      text-transform: uppercase;
+    }
+    .content-user {
+      display: flex;
+      align-items: center;
     }
   }
-  .logout-button{
+  .logout-button {
     margin-top: 5px;
-    padding: 8px 15px;
+    padding: 8px 10px;
     cursor: pointer;
     font-weight: 600;
     background-color: #f8f9fa;
     border: 1px solid #e0e0e0;
     border-radius: 4px;
+  }
+}
+@media (max-width: 590px) {
+  .content-user span {
+    display: none;
+  }
+}
+
+.btn {
+  border: 1px #a6a6a6 solid;
+  background: white;
+  padding: 6px 10px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+
+}
+.content-btns {
+  gap: 10px;
+  display: flex;
+  margin: 10px auto;
+  width: 100%;
+  max-width: 1225px;
+}
+@media (max-width: 1230px){
+  .content-btns{
+    margin-left: 20px;
+    :hover {
+      background-color: darken($light-color, 5%);
+    }
+  }
+  
+
+}
+@media (max-width: 425px){
+  .logout-button i{
+    display: none;
   }
 }

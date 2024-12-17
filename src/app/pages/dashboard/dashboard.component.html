@@ -1,17 +1,43 @@
 <!-- Loading Component -->
 <app-loading [isLoading]="isLoading"></app-loading>
+<app-header [nombreUsuario]="nombreUsuario"></app-header>
 <div class="dashboard">
     <!-- Header -->
-    <app-header [nombreUsuario]="nombreUsuario"></app-header>
-
+    <div></div>
     <!-- FILTRO -->
-    <app-filter [years]="years" [months]="months" [selectedYear]="year" [selectedMonth]="month" [isLoading]="isLoading" (filterYearMonth)="onFilter($event.year, $event.month)">
+    <app-filter [years]="years" [months]="months" [selectedYear]="year" [selectedMonth]="month" [isLoading]="isLoading" (filter)="onFilter($event.year, $event.month)">
     </app-filter>
 
-    <!-- Botón para exportar resumen de año y mes -->
-    <button (click)="exportYearMonthSummary()" class="export-button" [disabled]="isLoading">
-    Exportar Resumen (Año y Mes)
-  </button>
+    <!-- <div class="exportYearMonthSummary" > -->
+            <!-- Botón para exportar resumen de año y mes -->
+    <!-- <button (click)="exportYearMonthSummary()" class="export-button" [disabled]="isLoading">
+        Exportar Resumen (Año y Mes)
+      </button>
+    </div> -->
+        <div class="cardSummaryYearMonth media-pc-summary" >
+            <div class="SummaryMonth">
+                <p class="textMonth">Resumen de Mes:</p>
+                <div class="bag-mont-select">
+                    <p>Noviembre</p>
+                </div>
+            </div>
+
+            <div class="card-content-SummaryYearMonth">
+                <div class="all-data">
+                    <div class="circleSummary status orange">25</div>
+                    <p class="status orange align">$262,000</p>
+                </div>
+                <div class="all-data">
+                    <div class="circleSummary status green">10</div>
+                    <p class="status green align">$201,000</p>
+                </div>
+                <div class="all-data">
+                    <div class="circleSummary status red">05</div>
+                    <p class="status red align">$100,000</p>
+                </div>
+            </div>
+
+    </div>
 
     <!-- CARD LIQUIDACIONES POR DIA -->
     <div class="cards-grid container">
