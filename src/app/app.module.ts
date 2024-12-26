@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { AuthenticationModule } from './authentication/authentication.module';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { HeaderComponent } from './shared/header/header.component';
 import { FilterComponent } from './shared/filter/filter.component';
 import { LoadingComponent } from './shared/loading/loading.component';
@@ -17,30 +17,22 @@ import { PaymentCardComponent } from './shared/payment-card/payment-card.compone
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { ContributorComponent } from './pages/contributor/contributor.component';
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    DashboardComponent,
-    HeaderComponent,
-    FilterComponent,
-    LoadingComponent,
-    DetailComponent,
-    PaginatorComponent,
-    PaymentCardComponent,
-    ContributorComponent,
-  ],
-  imports: [
-    AuthenticationModule,
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    InfiniteScrollModule
-    
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent,
+        DashboardComponent,
+        HeaderComponent,
+        FilterComponent,
+        LoadingComponent,
+        DetailComponent,
+        PaginatorComponent,
+        PaymentCardComponent,
+        ContributorComponent,
+    ],
+    bootstrap: [AppComponent], imports: [AuthenticationModule,
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        ReactiveFormsModule,
+        InfiniteScrollModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule { }
