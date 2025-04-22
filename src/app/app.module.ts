@@ -16,23 +16,29 @@ import { PaginatorComponent } from './shared/paginator/paginator.component';
 import { PaymentCardComponent } from './shared/payment-card/payment-card.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { ContributorComponent } from './pages/contributor/contributor.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { MatDialogModule } from '@angular/material/dialog';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({ declarations: [
         AppComponent,
         DashboardComponent,
         HeaderComponent,
-        FilterComponent,
         LoadingComponent,
         DetailComponent,
         PaginatorComponent,
         PaymentCardComponent,
         ContributorComponent,
+        
     ],
-    bootstrap: [AppComponent], imports: [AuthenticationModule,
+    bootstrap: [AppComponent], imports: [
+        SharedModule,
+        MatDialogModule,
+        AuthenticationModule,
         BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,
         FormsModule,
         ReactiveFormsModule,
-        InfiniteScrollModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
+        InfiniteScrollModule], providers: [provideHttpClient(withInterceptorsFromDi()), provideAnimationsAsync()] })
 export class AppModule { }

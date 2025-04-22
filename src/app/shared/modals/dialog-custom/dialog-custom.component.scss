@@ -1,0 +1,98 @@
+$warning-color: #ffc107;
+
+
+.content-info{
+    width: 100%;
+    margin: 10px 15px;
+    height: 90px;
+    background: white;
+    // max-width: 997px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+}
+.img-local{
+    width: 45px;
+    height: 45px;
+    margin: 0 10px;
+}
+.info-all{
+    margin-left: 10px;
+    width: 100%;
+    // height: 60px;
+    grid-template-columns: repeat(2, minmax(10px, 1fr));
+    display: grid;
+
+    .text-colum{
+        display: flex;
+        p{
+            font-size: 18px;
+        }
+        .space-text{
+            margin-right: 10px;
+        }
+    }
+
+}
+.cardSummaryYearMonth{
+    margin: 10px auto;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background: white;
+    border-radius: 8px;
+    height: auto;
+    max-width: 1217px;
+  }
+  .SummaryMonth{
+    display: flex;
+    padding: 8px 0 0 20px;
+  }
+  .bag-mont-select{
+    background: #ededed;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    max-width: 120px;
+    width: 100%;
+    margin-left: 5px;
+    align-items: center;
+  }
+  .bag-mont-select p{
+    margin: 0;
+  }
+  .card-content-SummaryYearMonth {
+    display: flex;
+    justify-content: space-evenly;
+  
+  }
+  .all-data {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 80px;
+    width: 100%;
+  }
+  .circleSummary{
+    width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 18px;
+      margin: 0 auto 10px;
+  }
+  .green{
+    background-color: #c4f1ce;
+    color: #28a745;
+  }
+  .red{
+  
+    background-color: #f6cdd1;
+    color: #dc3545;
+  
+  }
+  .orange {
+    background-color: lighten($warning-color, 30%);
+    color: darken($warning-color, 10%);
+  }
